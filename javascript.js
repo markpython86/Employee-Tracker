@@ -30,6 +30,11 @@
           let newStartDate = $("<td>" + startDate+"</td>");
           
           let newRate = $("<td>" + monthlyRate+"</td>");
+
+          $("#employee-name").val("");
+          $("#role").val("");
+          $("#start-date").val("");
+          $("#monthly-rate").val("");
   
   
           // newEmployee.append(employeeName);
@@ -43,7 +48,7 @@
           startDate: newStartDate,
           monthsWorked: monthsWorked,
           rate: newRate
-  })
+         });
   
       });
   
