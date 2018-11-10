@@ -55,17 +55,19 @@
           $("#role").val("");
           $("#start-date").val("");
           $("#monthly-rate").val("");
-  
-          database.ref().push({
-            name: employeeName,
-            role: EmpRole,
-            startDate: startDate,
-            monthsWorked: monthsWorked,
-            dateAdded: timestamp,
-            rate: monthlyRate,
-            totalBilled: "total"
-          });
 
+
+  
+      database.ref().push({
+        name: employeeName,
+        role: role,
+        startDate: startDate,
+        monthsWorked: monthsWorked,
+        dateAdded: timestamp,
+        rate: monthlyRate,
+        totalBilled: "total"
+
+      })
 
       });
   
