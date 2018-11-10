@@ -113,14 +113,19 @@
 
   // Initialize Firebase
   var config = {
-    apiKey: "AIzaSyDkGvHn1W2xXQrCVZJngOi7BcFDF4YHtNw",
-    authDomain: "click-project-38f8c.firebaseapp.com",
-    databaseURL: "https://click-project-38f8c.firebaseio.com",
-    projectId: "click-project-38f8c",
-    storageBucket: "click-project-38f8c.appspot.com",
-    messagingSenderId: "370538991871",
-  };
-  firebase.initializeApp(config);
+  apiKey: "AIzaSyDqGwtpv1GP9PucOlppoVRmdMopq-cxn-I",
+  authDomain: "invertible-hook-221019.firebaseapp.com",
+  databaseURL: "https://invertible-hook-221019.firebaseio.com",
+  projectId: "invertible-hook-221019",
+  storageBucket: "invertible-hook-221019.appspot.com",
+  messagingSenderId: "899783432869"
+};
+
+firebase.initializeApp(config);
+
+
+// Assign the reference to the database to a variable named 'database'
+var database = firebase.database();
 
 
   $("#submit-form").on("click", function (event) {
