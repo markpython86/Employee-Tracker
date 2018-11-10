@@ -27,6 +27,7 @@
           let newRole = $("<td>" + role+"</td>");
           let monthsWorked = $("<td>" + "Monthly Rate"+"</td>");
           let newStartDate = $("<td>" + startDate+"</td>");
+          let timestamp = Date.now();
           
           let newRate = $("<td>" + monthlyRate+"</td>");
 
@@ -46,8 +47,10 @@
         role: role,
         startDate: startDate,
         monthsWorked: monthsWorked,
+        dateAdded: timestamp,
         rate: monthlyRate,
         totalBilled: "total"
+
       })
 
       });
