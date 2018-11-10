@@ -13,50 +13,59 @@
   // Assign the reference to the database to a variable named 'database'
   var database = firebase.database();
   
+  database.ref().orderByChild("dateAdded").limitToLast(3).on("child_added", function(childSnapshot){
+    $("#employee-name").text(childSnapshot.val().name);
+    $("#role").text(childSnapshot.val().role);
+    $("#start-date").text(childSnapshot.val().startdate);
+    $("#monthly-rate").text(childSnapshot.val().rate);
+
+    employeeName = childSnapshot.val().name;
+          EmpRole = childSnapshot.val().role;
+          startDate = childSnapshot.val().startDate;
+          monthlyRate = childSnapshot.val().rate;
+  
+          let newRow = $("<tr>");
+          let newEmployee = $("<td>" + employeeName+"</td>");
+          let newRole = $("<td>" + EmpRole+"</td>");
+          let monthsWorked = $("<td>" + "Monthly Rate"+"</td>");
+          let newStartDate = $("<td>" + startDate+"</td>");          
+          let newRate = $("<td>" + monthlyRate+"</td>");
+          newRow.append(newEmployee).append(newRole).append(newStartDate).append(monthsWorked).append(newRate);
+          $("#tableBody").append(newRow);
+
+
+    console.log(childSnapshot.val());
+    console.log(childSnapshot.val().startDate)
+
+  });
   
     $("#submit-form").on("click", function (event) {
           event.preventDefault();
   
           employeeName = $("#employee-name").val().trim();
-          role = $("#role").val().trim();
+          EmpRole = $("#role").val().trim();
           startDate = $("#start-date").val().trim();
           monthlyRate = $("#monthly-rate").val().trim();
   
-          let newRow = $("<tr>");
-          let newEmployee = $("<td>" + employeeName+"</td>");
-          let newRole = $("<td>" + role+"</td>");
           let monthsWorked = $("<td>" + "Monthly Rate"+"</td>");
-          let newStartDate = $("<td>" + startDate+"</td>");
           let timestamp = Date.now();
-          
-          let newRate = $("<td>" + monthlyRate+"</td>");
+
 
           $("#employee-name").val("");
           $("#role").val("");
           $("#start-date").val("");
           $("#monthly-rate").val("");
   
-  
-          // newEmployee.append(employeeName);
-          newRow.append(newEmployee).append(newRole).append(newStartDate).append(monthsWorked).append(newRate);
-          $("#tableBody").append(newRow);
-  
+          database.ref().push({
+            name: employeeName,
+            role: EmpRole,
+            startDate: startDate,
+            monthsWorked: monthsWorked,
+            dateAdded: timestamp,
+            rate: monthlyRate,
+            totalBilled: "total"
+          });
 
-  
-      database.ref().push({
-        name: employeeName,
-        role: role,
-        startDate: startDate,
-        monthsWorked: monthsWorked,
-        dateAdded: timestamp,
-        rate: monthlyRate,
-        totalBilled: "total"
-<<<<<<< HEAD
-
-      })
-=======
-      });
->>>>>>> 0ee0cba1dd59083d41d0fc10d3338220a5e8038e
 
       });
   
