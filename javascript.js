@@ -20,18 +20,18 @@
     $("#monthly-rate").text(childSnapshot.val().rate);
 
     employeeName = childSnapshot.val().name;
-          EmpRole = childSnapshot.val().role;
-          startDate = childSnapshot.val().startDate;
-          monthlyRate = childSnapshot.val().rate;
-  
-          let newRow = $("<tr>");
-          let newEmployee = $("<td>" + employeeName+"</td>");
-          let newRole = $("<td>" + EmpRole+"</td>");
-          let monthsWorked = $("<td>" + "Monthly Rate"+"</td>");
-          let newStartDate = $("<td>" + startDate+"</td>");          
-          let newRate = $("<td>" + monthlyRate+"</td>");
-          newRow.append(newEmployee).append(newRole).append(newStartDate).append(monthsWorked).append(newRate);
-          $("#tableBody").append(newRow);
+    EmpRole = childSnapshot.val().role;
+    startDate = childSnapshot.val().startDate;
+    monthlyRate = childSnapshot.val().rate;
+
+    let newRow = $("<tr>");
+    let newEmployee = $("<td>" + employeeName+"</td>");
+    let newRole = $("<td>" + EmpRole+"</td>");
+    let monthsWorked = $("<td>" + "Monthly Rate"+"</td>");
+    let newStartDate = $("<td>" + startDate+"</td>");          
+    let newRate = $("<td>" + monthlyRate+"</td>");
+    newRow.append(newEmployee).append(newRole).append(newStartDate).append(monthsWorked).append(newRate);
+    $("#tableBody").append(newRow);
 
 
     console.log(childSnapshot.val());
