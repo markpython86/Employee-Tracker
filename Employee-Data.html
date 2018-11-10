@@ -15,7 +15,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
   <!-- Firebase Reference -->
-  <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+
 
   <style>
       .jumbotron{
@@ -154,7 +154,23 @@
   </div>
 
   <!-- JavaScript -->
+
+  <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
+
   <script>
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDkGvHn1W2xXQrCVZJngOi7BcFDF4YHtNw",
+    authDomain: "click-project-38f8c.firebaseapp.com",
+    databaseURL: "https://click-project-38f8c.firebaseio.com",
+    projectId: "click-project-38f8c",
+    storageBucket: "click-project-38f8c.appspot.com",
+    messagingSenderId: "370538991871",
+  };
+  firebase.initializeApp(config);
+
+
   $("#submit-form").on("click", function (event) {
         event.preventDefault();
 
@@ -185,6 +201,15 @@
         // newRate.append(monthlyRate);
         newRow.append(newRate);
         $("#tableBody").append(newRow);
+
+
+        database.ref().push({
+        name: newEmployee,
+        role: newRole,
+        startDate: newStartDate,
+        monthsWorked: monthsWorked,
+        rate: newRate
+})
 
     });
 
