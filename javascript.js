@@ -40,17 +40,8 @@
           newRow.append(newEmployee).append(newRole).append(newStartDate).append(monthsWorked).append(newRate);
           $("#tableBody").append(newRow);
   
+
   
-<<<<<<< HEAD
-          database.ref().push({
-          name: newEmployee,
-          role: newRole,
-          startDate: newStartDate,
-          monthsWorked: monthsWorked,
-          rate: newRate
-         });
-  
-=======
       database.ref().push({
         name: employeeName,
         role: role,
@@ -58,8 +49,7 @@
         monthsWorked: monthsWorked,
         rate: monthlyRate,
         totalBilled: "total"
-      })
+      });
 
->>>>>>> 2a667edb69a2212c46b5314e7edccd05f0f4bcc2
       });
   
