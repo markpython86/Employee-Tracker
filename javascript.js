@@ -14,10 +14,6 @@
   var database = firebase.database();
   
   database.ref().orderByChild("dateAdded").limitToLast(3).on("child_added", function(childSnapshot){
-    $("#employee-name").text(childSnapshot.val().name);
-    $("#role").text(childSnapshot.val().role);
-    $("#start-date").text(childSnapshot.val().startdate);
-    $("#monthly-rate").text(childSnapshot.val().rate);
 
     employeeName = childSnapshot.val().name;
     EmpRole = childSnapshot.val().role;
@@ -60,7 +56,7 @@
   
       database.ref().push({
         name: employeeName,
-        role: role,
+        role: EmpRole,
         startDate: startDate,
         monthsWorked: monthsWorked,
         dateAdded: timestamp,
