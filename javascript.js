@@ -60,7 +60,7 @@
   
       database.ref().push({
         name: employeeName,
-        role: role,
+        role: EmpRole,
         startDate: startDate,
         monthsWorked: monthsWorked,
         dateAdded: timestamp,
