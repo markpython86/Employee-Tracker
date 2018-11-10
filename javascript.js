@@ -51,12 +51,8 @@
         dateAdded: timestamp,
         rate: monthlyRate,
         totalBilled: "total"
-<<<<<<< HEAD
 
       })
-=======
-      });
->>>>>>> 0ee0cba1dd59083d41d0fc10d3338220a5e8038e
 
       });
   
