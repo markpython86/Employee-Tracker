@@ -1,13 +1,12 @@
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDqGwtpv1GP9PucOlppoVRmdMopq-cxn-I",
-    authDomain: "invertible-hook-221019.firebaseapp.com",
-    databaseURL: "https://invertible-hook-221019.firebaseio.com",
-    projectId: "invertible-hook-221019",
-    storageBucket: "invertible-hook-221019.appspot.com",
-    messagingSenderId: "899783432869"
+   // Initialize Firebase
+   var config = {
+    apiKey: "AIzaSyB5aZZCnNDXoH3XiioLOSPPkn6NoCeKCSg",
+    authDomain: "employee-tracker-fa0b7.firebaseapp.com",
+    databaseURL: "https://employee-tracker-fa0b7.firebaseio.com",
+    projectId: "employee-tracker-fa0b7",
+    storageBucket: "",
+    messagingSenderId: "207265387128"
   };
-  
   firebase.initializeApp(config);
   
   
@@ -42,6 +41,7 @@
           $("#tableBody").append(newRow);
   
   
+<<<<<<< HEAD
           database.ref().push({
           name: newEmployee,
           role: newRole,
@@ -50,5 +50,16 @@
           rate: newRate
          });
   
+=======
+      database.ref().push({
+        name: employeeName,
+        role: role,
+        startDate: startDate,
+        monthsWorked: monthsWorked,
+        rate: monthlyRate,
+        totalBilled: "total"
+      })
+
+>>>>>>> 2a667edb69a2212c46b5314e7edccd05f0f4bcc2
       });
   
