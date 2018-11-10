@@ -20,13 +20,20 @@
     startDate = childSnapshot.val().startDate;
     monthlyRate = childSnapshot.val().rate;
 
+    let dateFormat = moment(childSnapshot.val().startDate, 'YYYY/MM/DD');
+    let dateConverted = moment().diff(dateFormat, "month");
+    let finalTotalBilled = (dateConverted * monthlyRate);
+
+    console.log(dateConverted);
+
     let newRow = $("<tr>");
     let newEmployee = $("<td>" + employeeName+"</td>");
     let newRole = $("<td>" + EmpRole+"</td>");
-    let monthsWorked = $("<td>" + "Monthly Rate"+"</td>");
+    let monthsWorked = $("<td>" + dateConverted+"</td>");
     let newStartDate = $("<td>" + startDate+"</td>");          
     let newRate = $("<td>" + monthlyRate+"</td>");
-    newRow.append(newEmployee).append(newRole).append(newStartDate).append(monthsWorked).append(newRate);
+    let newBill = $("<td>" + finalTotalBilled+"</td>");
+    newRow.append(newEmployee).append(newRole).append(newStartDate).append(monthsWorked).append(newRate).append(newBill);
     $("#tableBody").append(newRow);
 
 
@@ -44,6 +51,9 @@
           monthlyRate = $("#monthly-rate").val().trim();
   
           let monthsWorked = $("<td>" + "Monthly Rate"+"</td>");
+          let finalTotalBilled = (dateConverted * monthlyRate);
+          
+         
           let timestamp = Date.now();
 
 
@@ -61,7 +71,7 @@
         monthsWorked: monthsWorked,
         dateAdded: timestamp,
         rate: monthlyRate,
-        totalBilled: "total"
+        totalBilled: finalTotalBilled
 
       })
 
