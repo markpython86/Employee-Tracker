@@ -31,8 +31,8 @@
     let newRole = $("<td>" + EmpRole+"</td>");
     let monthsWorked = $("<td>" + dateConverted+"</td>");
     let newStartDate = $("<td>" + startDate+"</td>");          
-    let newRate = $("<td>" + "$" + monthlyRate+"</td>");
-    let newBill = $("<td>" + "$" + finalTotalBilled+"</td>");
+    let newRate = $("<td>" + monthlyRate+"</td>");
+    let newBill = $("<td>" + finalTotalBilled+"</td>");
     newRow.append(newEmployee).append(newRole).append(newStartDate).append(monthsWorked).append(newRate).append(newBill);
     $("#tableBody").append(newRow);
 
@@ -49,11 +49,7 @@
           EmpRole = $("#role").val().trim();
           startDate = $("#start-date").val().trim();
           monthlyRate = $("#monthly-rate").val().trim();
-  
-          let monthsWorked = $("<td>" + "Monthly Rate"+"</td>");
-          let finalTotalBilled = (dateConverted * monthlyRate);
-          
-         
+            
           let timestamp = Date.now();
 
 
@@ -68,11 +64,8 @@
         name: employeeName,
         role: EmpRole,
         startDate: startDate,
-        monthsWorked: monthsWorked,
         dateAdded: timestamp,
-        rate: monthlyRate,
-        totalBilled: finalTotalBilled
-
+        rate: monthlyRate
       })
 
       });
