@@ -1,13 +1,13 @@
-   // Initialize Firebase
-   var config = {
-    apiKey: "AIzaSyB5aZZCnNDXoH3XiioLOSPPkn6NoCeKCSg",
-    authDomain: "employee-tracker-fa0b7.firebaseapp.com",
-    databaseURL: "https://employee-tracker-fa0b7.firebaseio.com",
-    projectId: "employee-tracker-fa0b7",
-    storageBucket: "",
-    messagingSenderId: "207265387128"
-  };
-  firebase.initializeApp(config);
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyArXY8aWa4zFTZ11OTDE7CUwlmHkWHvgnA",
+  authDomain: "train-app-b037e.firebaseapp.com",
+  databaseURL: "https://train-app-b037e.firebaseio.com",
+  projectId: "train-app-b037e",
+  storageBucket: "train-app-b037e.appspot.com",
+  messagingSenderId: "853509472543"
+};
+firebase.initializeApp(config);
   
   
   // Assign the reference to the database to a variable named 'database'
@@ -15,12 +15,12 @@
   
   database.ref().orderByChild("dateAdded").limitToLast(3).on("child_added", function(childSnapshot){
 
-    employeeName = childSnapshot.val().name;
-    EmpRole = childSnapshot.val().role;
-    startDate = childSnapshot.val().startDate;
-    monthlyRate = childSnapshot.val().rate;
+    trainName = childSnapshot.val().name;
+    trainDestination = childSnapshot.val().destination;
+    startTime = childSnapshot.val().startTime;
+    frequency = childSnapshot.val().frequency;
 
-    let dateFormat = moment(childSnapshot.val().startDate, 'YYYY/MM/DD');
+    let timeFormat = moment(childSnapshot.val().startTime, 'YYYY/MM/DD');
     let dateConverted = moment().diff(dateFormat, "month");
     let finalTotalBilled = (dateConverted * monthlyRate);
 
@@ -62,7 +62,7 @@
   
       database.ref().push({
         name: trainName,
-        role: trainDestination,
+        destination: trainDestination,
         startTime: startTime,
         dateAdded: timestamp,
         frequency: frequency,
