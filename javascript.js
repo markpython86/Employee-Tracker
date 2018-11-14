@@ -9,108 +9,86 @@ var config = {
 };
 firebase.initializeApp(config);
   
-  
-  // Assign the reference to the database to a variable named 'database'
-  var database = firebase.database();
-  
-  database.ref().orderByChild("dateAdded").limitToLast(3).on("child_added", function(childSnapshot){
+//Submit client side data to firebase.
+$("#submit-form").on("click", function (event) {
+  event.preventDefault();
 
-    trainName = childSnapshot.val().name;
-    trainDestination = childSnapshot.val().destination;
-    startTime = childSnapshot.val().startTime;
-    frequency = childSnapshot.val().frequency;
-
-    let timeFormat = moment(childSnapshot.val().startTime, 'YYYY/MM/DD');
-    let dateConverted = moment().diff(dateFormat, "month");
-    let finalTotalBilled = (dateConverted * monthlyRate);
-
-    console.log(dateConverted);
-
-    let newRow = $("<tr>");
-    let newEmployee = $("<td>" + employeeName+"</td>");
-    let newRole = $("<td>" + EmpRole+"</td>");
-    let monthsWorked = $("<td>" + dateConverted+"</td>");
-    let newStartDate = $("<td>" + startDate+"</td>");   
+  trainName = $("#train-name").val().trim();
+  trainDestination = $("#train-destination").val().trim();
+  startTime = $("#start-time").val().trim();
+  frequency = $("#frequency").val().trim();
     
+  let timestamp = Date.now();
+
+
+  $("#train-name").val("");
+  $("#train-destination").val("");
+  $("#start-time").val("");
+  $("#frequency").val("");
+
+
+
+database.ref().push({
+name: trainName,
+destination: trainDestination,
+startTime: startTime,
+dateAdded: timestamp,
+frequency: frequency,
+})
+
+});   
+
+
+
+
+// Assign the reference to the database to a variable named 'database'
+var database = firebase.database();
+
+database.ref().orderByChild("dateAdded").limitToLast(3).on("child_added", function(childSnapshot){
+
+  trainName = childSnapshot.val().name;
+  trainDestination = childSnapshot.val().destination;
+  startTime = childSnapshot.val().startTime;
+  frequency = childSnapshot.val().frequency;
+
+
+  console.log(childSnapshot.val());
+  
+  var timeArrival = startTime.split(":");
+  var trainTime = moment().hours(timeArrival[0]).minutes(timeArrival[1]);
+  var maxMoment = moment.max(moment(), trainTime);
+
+  var tMinutes;
+  var tArrivals;
+
+  if (maxMoment === trainTime) {
+    tArrivals=trainTime.format("hh:mm A");
+    tMinutes=trainTime.diff(moment(), "minutes");
+  } else {
+    var diffTime = moment().diff(trainTime, "minutes");
+    var tRemainder = diffTime % frequency;
+    tMinutes = frequency - tRemainder;
+    tArrivals = moment().add(tMinutes, "m").format("hh:mm A");
+  }
+
+  console.log(tMinutes);
+  console.log(tArrivals);
+
+
+
+  let newRow = $("<tr>");
+  let newTrain = $("<td>" + trainName +"</td>");
+  let newDestination = $("<td>" + trainDestination +"</td>");
+  let newFrequency = $("<td>" + frequency +"</td>"); 
+  let newArrival = $("<td>" + tArrivals +"</td>");
+  let newMinAway = $("<td>" + tMinutes +"</td>");
     
-    let newRate = $("<td>" + monthlyRate+"</td>");
-    let newBill = $("<td>" + finalTotalBilled+"</td>");
-    newRow.append(newEmployee).append(newRole).append(newStartDate).append(monthsWorked).append(newRate).append(newBill);
-    $("#tableBody").append(newRow);
 
 
-    console.log(childSnapshot.val());
-    console.log(childSnapshot.val().startDate)
-
-    // Assumptions
-
-    // Time is 3:30 AM
-
-    // First Time (pushed back 1 year to make sure it comes before current time)
-    var firstTimeConverted = moment(startTime, "HH:mm").subtract(1, "days");
-    console.log(firstTimeConverted);
-
-    // Current Time
-    var currentTime = moment();
-    console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
-
-    // Difference between the times
-    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-    console.log("DIFFERENCE IN TIME: " + diffTime);
-
-    // Time apart (remainder)
-    var remainder = diffTime % frequency;
-    console.log(frequency);
-    console.log(remainder);
+  newRow.append(newTrain).append(newDestination).append(newFrequency).append(newArrival).append(newMinAway);
+  $("#tableBody").append(newRow);
 
 
-    //last field for minutes left=================================================
-    // Minute Until Train
-    var minutesTillTrain = frequency - remainder;
-    //append to minTilTrain
-    //===============================================
-    console.log("MINUTES TILL TRAIN: " + minutesTillTrain);
+});
 
-
-        //next arrivel field=================================================
-
-    // Next Train
-    var nextTrain = moment().add(minutesTillTrain, "minutes");
-    console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
-
-    // push to new name of variable nextArrival
-
-
-    //next arrivel field=================================================
-
-
-  });
-  
-    $("#submit-form").on("click", function (event) {
-          event.preventDefault();
-  
-          trainName = $("#train-name").val().trim();
-          trainDestination = $("#train-destination").val().trim();
-          startTime = $("#start-time").val().trim();
-          frequency = $("#frequency").val().trim();
-            
-          let timestamp = Date.now();
-
-
-          $("#train-name").val("");
-          $("#train-destination").val("");
-          $("#start-time").val("");
-          $("#frequency").val("");
-
-
-  
-      database.ref().push({
-        name: trainName,
-        destination: trainDestination,
-        startTime: startTime,
-        dateAdded: timestamp,
-        frequency: frequency,
-      })
-
-      });   
   
