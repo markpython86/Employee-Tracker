@@ -45,27 +45,27 @@
     $("#submit-form").on("click", function (event) {
           event.preventDefault();
   
-          employeeName = $("#employee-name").val().trim();
-          EmpRole = $("#role").val().trim();
-          startDate = $("#start-date").val().trim();
-          monthlyRate = $("#monthly-rate").val().trim();
+          trainName = $("#train-name").val().trim();
+          trainDestination = $("#train-destination").val().trim();
+          startTime = $("#start-time").val().trim();
+          frequency = $("#frequency").val().trim();
             
           let timestamp = Date.now();
 
 
-          $("#employee-name").val("");
-          $("#role").val("");
-          $("#start-date").val("");
-          $("#monthly-rate").val("");
+          $("#train-name").val("");
+          $("#train-destination").val("");
+          $("#start-time").val("");
+          $("#frequency").val("");
 
 
   
       database.ref().push({
-        name: employeeName,
-        role: EmpRole,
-        startDate: startDate,
+        name: trainName,
+        role: trainDestination,
+        startTime: startTime,
         dateAdded: timestamp,
-        rate: monthlyRate
+        frequency: frequency,
       })
 
       });
